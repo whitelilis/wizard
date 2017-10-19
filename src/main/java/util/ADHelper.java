@@ -1,7 +1,5 @@
 package util;
 
-import com.sun.istack.internal.NotNull;
-
 public class ADHelper {
     /**
      * Raw data, like
@@ -61,12 +59,10 @@ public class ADHelper {
     }
 
 
-    @NotNull
     public static boolean isMd5(String key) {
         return key.matches("[a-fA-F0-9]{32}");
     }
 
-    @NotNull
     public static boolean allHex(String str) {
         return str.matches("[a-fA-F0-9]+");
     }
