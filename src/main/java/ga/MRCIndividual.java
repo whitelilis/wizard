@@ -17,19 +17,19 @@ class MRCIndividual extends Individual {
 		chrom = new Chromosome(len);
 	}
 	
-	//±àÂë
+	//ç¼–ç 
 	@Override
 	public void coding(){
 		chrom.setGene(0 , len - 1, zeroOneString);
 	}
 	
-	//½âÂë
+	//è§£ç 
 	@Override
 	public void decode(){
 		zeroOneString = chrom.getGene(0 , len - 1);
 	}
 	
-	//¼ÆËãÄ¿±êº¯ÊıÖµ
+	//è®¡ç®—ç›®æ ‡å‡½æ•°å€¼
 	@Override
 	public  void calTargetValue(){
 		decode();
@@ -49,7 +49,7 @@ class MRCIndividual extends Individual {
 		}
 	}
 	
-	//¼ÆËã¸öÌåÊÊÓ¦¶È
+	//è®¡ç®—ä¸ªä½“é€‚åº”åº¦
 	@Override
 	public void calFitness(){
 		fitness = - Math.abs(this.aimSum - getTargetValue());
@@ -98,7 +98,7 @@ class MRCIndividual extends Individual {
 	}
 
 
-	//Ëæ»ú²úÉú¸öÌå
+	//éšæœºäº§ç”Ÿä¸ªä½“
 	@Override
 	public void generateIndividual(){
 		StringBuilder sb = new StringBuilder();
@@ -112,7 +112,7 @@ class MRCIndividual extends Individual {
 			}
 		}
 		zeroOneString = sb.toString();
-		//Í¬²½±àÂëºÍÊÊÓ¦¶È
+		//åŒæ­¥ç¼–ç å’Œé€‚åº”åº¦
 		coding();
 		calTargetValue();
 		calFitness();

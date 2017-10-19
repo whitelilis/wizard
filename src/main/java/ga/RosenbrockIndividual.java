@@ -1,15 +1,15 @@
 package ga;
 
 class RosenbrockIndividual extends Individual {
-	private double x1 , x2; // ¸öÌå±íÏÖĞÍ
-	//»ùÒòĞÍchromosomeÓÉ (x1 , x2)±àÂë¶ø³É
+	private double x1 , x2; // ä¸ªä½“è¡¨ç°å‹
+	//åŸºå› å‹chromosomeç”± (x1 , x2)ç¼–ç è€Œæˆ
 	
 	RosenbrockIndividual(int chromlen){
 		genelen = 10;
 		chrom = new Chromosome(chromlen);
 	}
 	
-	//±àÂë
+	//ç¼–ç 
 	public void coding(){
 		String code1,code2;
 		code1 = codingVariable(x1);
@@ -19,7 +19,7 @@ class RosenbrockIndividual extends Individual {
 		chrom.setGene(10, 19 , code2);
 	}
 	
-	//½âÂë
+	//è§£ç 
 	public void decode(){
 		String gene1,gene2;
 		
@@ -30,13 +30,13 @@ class RosenbrockIndividual extends Individual {
 		x2 = decodeGene(gene2);
 	}
 	
-	//¼ÆËãÄ¿±êº¯ÊıÖµ
+	//è®¡ç®—ç›®æ ‡å‡½æ•°å€¼
 	public  void calTargetValue(){
 		decode();
 		targetValue = rosenbrock(x1 , x2);
 	}
 	
-	//¼ÆËã¸öÌåÊÊÓ¦¶È
+	//è®¡ç®—ä¸ªä½“é€‚åº”åº¦
 	public void calFitness(){
 		fitness = getTargetValue();
 	}
@@ -63,21 +63,21 @@ class RosenbrockIndividual extends Individual {
 		
 	public String toString(){
 		String str = "";
-		///str = "»ùÒòĞÍ:" + chrom + "  ";
-		///str+= "±íÏÖĞÍ:" + "[x1,x2]=" + "[" + x1 + "," + x2 + "]" + "\t";
-		str+="º¯ÊıÖµ:" + rosenbrock(x1 , x2) + "\n";
+		///str = "åŸºå› å‹:" + chrom + "  ";
+		///str+= "è¡¨ç°å‹:" + "[x1,x2]=" + "[" + x1 + "," + x2 + "]" + "\t";
+		str+="å‡½æ•°å€¼:" + rosenbrock(x1 , x2) + "\n";
 		
 		return 	str;	
 	}
 	
 	/**
-	 *Rosenbrockº¯Êı:
+	 *Rosenbrockå‡½æ•°:
 	 *f(x1,x2) = 100*(x1**2 - x2)**2 + (1 - x1)**2
-	 *ÔÚµ±xÔÚ[-2.048 , 2.048]ÄÚÊ±£¬
-	 *º¯ÊıÓĞÁ½¸ö¼«´óµã:
+	 *åœ¨å½“xåœ¨[-2.048 , 2.048]å†…æ—¶ï¼Œ
+	 *å‡½æ•°æœ‰ä¸¤ä¸ªæå¤§ç‚¹:
 	 *f(2.048 , -2.048) = 3897.7342
 	 *f(-2.048,-2.048) = 3905.926227
-	 *ÆäÖĞºóÕßÎªÈ«¾Ö×î´óµã¡£
+	 *å…¶ä¸­åè€…ä¸ºå…¨å±€æœ€å¤§ç‚¹ã€‚
 	 */
 	public static double rosenbrock(double x1 , double x2){
 		double fun;
@@ -86,12 +86,12 @@ class RosenbrockIndividual extends Individual {
 		return fun;
 	}
 	
-	//Ëæ»ú²úÉú¸öÌå
+	//éšæœºäº§ç”Ÿä¸ªä½“
 	public void generateIndividual(){
 		x1 = Math.random() * 4.096 - 2.048;
 		x2 = Math.random() * 4.096 - 2.048;
 		
-		//Í¬²½±àÂëºÍÊÊÓ¦¶È
+		//åŒæ­¥ç¼–ç å’Œé€‚åº”åº¦
 		coding();
 		calTargetValue();
 		calFitness();

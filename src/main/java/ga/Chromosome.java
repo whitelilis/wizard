@@ -1,10 +1,10 @@
 package ga;
 
-//È¾É«Ìå
+//æŸ“è‰²ä½“
 class Chromosome implements Cloneable{
 	private StringBuffer chromosome;
-	private int chromosomeLength;//È¾É«Ìå³¤¶È
-	private char defaultChar; //Ä¬ÈÏ»ùÒòÌî³ä×Ö·û
+	private int chromosomeLength;//æŸ“è‰²ä½“é•¿åº¦
+	private char defaultChar; //é»˜è®¤åŸºå› å¡«å……å­—ç¬¦
 	
 	public Chromosome(int chromosomeLength){
 		chromosome = new StringBuffer(chromosomeLength);
@@ -13,7 +13,7 @@ class Chromosome implements Cloneable{
 		this.chromosomeLength = chromosomeLength;
 	}
 	
-	//ÉèÖÃ»ùÒò
+	//è®¾ç½®åŸºå› 
 	public boolean setGene(int begin , int end , String gene){
 		int len = gene.length();
 		
@@ -32,7 +32,7 @@ class Chromosome implements Cloneable{
 		return true;	
 	}
 	
-	//»ñÈ¡»ùÒò
+	//è·å–åŸºå› 
 	public String getGene(int begin , int end){
 		char[] dest = new char[end - begin + 1];
 		chromosome.getChars(begin , end + 1 , dest , 0);

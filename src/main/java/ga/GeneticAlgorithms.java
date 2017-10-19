@@ -3,10 +3,10 @@ package ga;
 import java.io.*;
 //2008-11-21
 class GeneticAlgorithms{
-	public static double crossoverRate;//½»²æ¸ÅÂÊ
-	public static double mutateRate;//±äÒì¸ÅÂÊ
-	public static int maxGeneration;//½ø»¯´úÊı
-	public static int populationSize;//ÈºÌå´óĞ¡
+	public static double crossoverRate;//äº¤å‰æ¦‚ç‡
+	public static double mutateRate;//å˜å¼‚æ¦‚ç‡
+	public static int maxGeneration;//è¿›åŒ–ä»£æ•°
+	public static int populationSize;//ç¾¤ä½“å¤§å°
 	
 	static {
 		maxGeneration  = 500;
@@ -24,7 +24,7 @@ class GeneticAlgorithms{
 		Population pop = new Population(populationSize);
 		pop.initPopulation();
 
-		pw.println("³õÊ¼ÖÖÈº:\n" + pop);
+		pw.println("åˆå§‹ç§ç¾¤:\n" + pop);
 		Individual best = null;
 		while(!pop.isEvolutionDone()){
 			System.out.println(pop.getGeneration());
@@ -38,12 +38,12 @@ class GeneticAlgorithms{
 				}
 			}
 
-			pw.print("µÚ" + pop.getGeneration() + "´úBest:" + pop.bestIndividual );
-			pw.print("µÚ" + pop.getGeneration()  + "´úcurrent:" + pop.currentBest );
+			pw.print("ç¬¬" + pop.getGeneration() + "ä»£Best:" + pop.bestIndividual );
+			pw.print("ç¬¬" + pop.getGeneration()  + "ä»£current:" + pop.currentBest );
 			pw.println("");		
 		}
 		pw.println();
-		pw.println("µÚ"+ pop.getGeneration()  + "´úÈºÌå:\n" + pop);
+		pw.println("ç¬¬"+ pop.getGeneration()  + "ä»£ç¾¤ä½“:\n" + pop);
 
 		pw.println("BEST" + ((MRCIndividual)best).show());
 		System.out.println("BEST" + ((MRCIndividual)best).show());

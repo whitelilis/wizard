@@ -1,16 +1,16 @@
 package ga;
 
 abstract class Individual implements Cloneable{
-	protected Chromosome chrom;//¸öÌå»ùÒòĞÍ:Ò»¸ö»ùÒòĞÍÈ¾É«ÌåÓÉ¶à¸ö»ùÒò×é³É
-	protected int genelen;//»ùÒò³¤¶È
-	protected double fitness;//ÊÊÓ¦¶È
-	protected double targetValue;//Ä¿±êº¯ÊıÖµ
+	protected Chromosome chrom;//ä¸ªä½“åŸºå› å‹:ä¸€ä¸ªåŸºå› å‹æŸ“è‰²ä½“ç”±å¤šä¸ªåŸºå› ç»„æˆ
+	protected int genelen;//åŸºå› é•¿åº¦
+	protected double fitness;//é€‚åº”åº¦
+	protected double targetValue;//ç›®æ ‡å‡½æ•°å€¼
 	
-	public abstract void coding();//±àÂë
-	public abstract void decode();//½âÂë
-	public abstract void calFitness();//¼ÆËã¸öÌåÊÊÓ¦¶È
-	public abstract void generateIndividual();//Ëæ»ú²úÉú¸öÌå
-	public abstract void calTargetValue();//»ñÈ¡Ä¿±êº¯ÊıÖµ 
+	public abstract void coding();//ç¼–ç 
+	public abstract void decode();//è§£ç 
+	public abstract void calFitness();//è®¡ç®—ä¸ªä½“é€‚åº”åº¦
+	public abstract void generateIndividual();//éšæœºäº§ç”Ÿä¸ªä½“
+	public abstract void calTargetValue();//è·å–ç›®æ ‡å‡½æ•°å€¼ 
 	
 	public double getFitness(){
 		return fitness;

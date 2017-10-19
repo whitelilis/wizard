@@ -6,16 +6,16 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 class Population{
-	private int generation; //ÖÖÈºµÄ´úÊı
-	private int size;			//ÈºÌå´óĞ¡
-	private Individual[] pop;   //ÖÖÈº
-	private double averageFitness;    //Æ½¾ùÊÊÓ¦¶È
-	private double[] relativeFitness;	//Ïà¶ÔÊÊÓ¦¶È
-	private int chromlen;//»ùÒò³¤¶È
-	Individual bestIndividual;//µ±Ç°´úÊÊÓ¦¶È×îºÃµÄ¸öÌå
-	Individual worstIndividual;//µ±Ç°´úÊÊÓ¦¶È×î²îµÄ¸öÌå
-	Individual currentBest;//µ½Ä¿Ç°´úÎªÖ¹×îºÃµÄ¸öÌå
-	private int worstIndex;//bestIndividual¶ÔÓ¦µÄÊı×éÏÂ±ê
+	private int generation; //ç§ç¾¤çš„ä»£æ•°
+	private int size;			//ç¾¤ä½“å¤§å°
+	private Individual[] pop;   //ç§ç¾¤
+	private double averageFitness;    //å¹³å‡é€‚åº”åº¦
+	private double[] relativeFitness;	//ç›¸å¯¹é€‚åº”åº¦
+	private int chromlen;//åŸºå› é•¿åº¦
+	Individual bestIndividual;//å½“å‰ä»£é€‚åº”åº¦æœ€å¥½çš„ä¸ªä½“
+	Individual worstIndividual;//å½“å‰ä»£é€‚åº”åº¦æœ€å·®çš„ä¸ªä½“
+	Individual currentBest;//åˆ°ç›®å‰ä»£ä¸ºæ­¢æœ€å¥½çš„ä¸ªä½“
+	private int worstIndex;//bestIndividualå¯¹åº”çš„æ•°ç»„ä¸‹æ ‡
 
 	
 	public Population(int size){
@@ -45,7 +45,7 @@ class Population{
 	}
 	
 	
-	//³õÊ¼»¯ÖÖÈº
+	//åˆå§‹åŒ–ç§ç¾¤
 	public void initPopulation(){
 		for(int i = 0;i < size;i++){
 			pop[i].generateIndividual();
@@ -55,14 +55,14 @@ class Population{
 	}
 
 	//----------------------------------------------------
-	//±ÈÀıÑ¡Ôñ
+	//æ¯”ä¾‹é€‰æ‹©
 	public void  select(){
-		double[] rouletteWheel; //¶ÄÅÌ
+		double[] rouletteWheel; //èµŒç›˜
 		Individual[] childPop = new Individual[size];
 		
 		calRelativeFitness();
 		
-		//²úÉú¶ÄÅÌ
+		//äº§ç”ŸèµŒç›˜
 		rouletteWheel  = new double[size];
 		rouletteWheel[0] = relativeFitness[0];
 		for(int i=1;i<size -1;i++){
@@ -70,7 +70,7 @@ class Population{
 		}
 		rouletteWheel[size - 1] = 1;
 		
-		//½øĞĞ¶ÄÅÌÑ¡Ôñ,²úÉúĞÂÖÖÈº
+		//è¿›è¡ŒèµŒç›˜é€‰æ‹©,äº§ç”Ÿæ–°ç§ç¾¤
 		for(int i = 0;i < size ; i++){
 			double rnd = rand();
 			for(int j = 0; j < size; j++){
@@ -88,7 +88,7 @@ class Population{
 		//return 	childPop;
 	}
 	
-	//Çó×ÜÊÊÓ¦¶È
+	//æ±‚æ€»é€‚åº”åº¦
 	private double calTotalFitness(){
 		double total = 0;
 		for(int i = 0 ; i < size ;i++)
@@ -96,7 +96,7 @@ class Population{
 		return total;
 	}
 		
-	//¼ÆËãÏà¶ÔÊÊÓ¦¶È
+	//è®¡ç®—ç›¸å¯¹é€‚åº”åº¦
 	public double[] calRelativeFitness(){
 		double totalFitness = calTotalFitness();
 		for(int i = 0 ;i < size ; i++){
@@ -109,11 +109,11 @@ class Population{
 	//================================
 	
 	//------------------------------------------------------
-	//µ¥µã½»²æ
+	//å•ç‚¹äº¤å‰
 	public void crossover(){
 		for(int i = 0 ; i < size/2*2; i+=2){
 			int rnd;
-			//Ëæ»úÁ½Á½Åä¶Ô
+			//éšæœºä¸¤ä¸¤é…å¯¹
 			rnd = rand(i , size);
 
 			if(rnd != i)
@@ -123,7 +123,7 @@ class Population{
 			if(rnd != i+1)
 				exchange(pop , i + 1 , rnd);	
 					
-			//½»²æ
+			//äº¤å‰
 			double random = rand();
 
 			if(random < GeneticAlgorithms.crossoverRate){
@@ -132,11 +132,11 @@ class Population{
 		}
 	}
 	
-	//Ö´ĞĞ½»²æ²Ù×÷
+	//æ‰§è¡Œäº¤å‰æ“ä½œ
 	private void cross(int i){
-		String chromFragment1,chromFragment2;//»ùÒòÆ¬¶Î
+		String chromFragment1,chromFragment2;//åŸºå› ç‰‡æ®µ
 		
-		int rnd = rand(0 , getChromlen() - 1);//½»²æµãÎªrndÖ®ºó,¿ÉÄÜµÄÎ»ÖÃÓĞchromlen - 1¸ö.
+		int rnd = rand(0 , getChromlen() - 1);//äº¤å‰ç‚¹ä¸ºrndä¹‹å,å¯èƒ½çš„ä½ç½®æœ‰chromlen - 1ä¸ª.
 		chromFragment1 = pop[i].getChrom(rnd + 1 , getChromlen() - 1);
 		chromFragment2 = pop[i+1].getChrom(rnd + 1 , getChromlen() - 1);
 			
@@ -144,12 +144,12 @@ class Population{
 		pop[i+1].setChrom(rnd + 1 , getChromlen() - 1 , chromFragment1);			
 	}
 	
-	//²úÉúËæ»úÊı
-	private int rand(int start , int end){//²úÉúÇø¼äÎª[start , end)µÄËæ»úÕûÊı
+	//äº§ç”Ÿéšæœºæ•°
+	private int rand(int start , int end){//äº§ç”ŸåŒºé—´ä¸º[start , end)çš„éšæœºæ•´æ•°
 		return (int)(rand()*(end - start) + start);
 	}
 	
-	//½»»»
+	//äº¤æ¢
 	private void exchange(Individual[] p ,int src , int dest){
 		Individual temp;
 		temp = p[src];
@@ -159,13 +159,13 @@ class Population{
 	//==============================
 
 	//-----------------------------------------------------
-	//±äÒì
+	//å˜å¼‚
 	public void mutate(){
 		for(int i = 0 ; i < size;i++){
 			for(int j = 0 ;j < getChromlen(); j++){
 				if(rand() < GeneticAlgorithms.mutateRate){
 					pop[i].mutateSingleBit(j);
-					///System.out.print("±äÒì"+ i +" - "+ j + "  ");///
+					///System.out.print("å˜å¼‚"+ i +" - "+ j + "  ");///
 				}	
 			}
 		}
@@ -173,7 +173,7 @@ class Population{
 	//==============================
 	
 	//-----------------------------------------------------
-	//½ø»¯
+	//è¿›åŒ–
 	public void evolve(){
 		select();
 		crossover();
@@ -183,21 +183,21 @@ class Population{
 	
 	
 	//==============================
-	//¼ÆËãÄ¿±êº¯ÊıÖµ¡¢ÊÊÓ¦¶È¡¢ÕÒ³ö×îÓÅ¸öÌå¡£
+	//è®¡ç®—ç›®æ ‡å‡½æ•°å€¼ã€é€‚åº”åº¦ã€æ‰¾å‡ºæœ€ä¼˜ä¸ªä½“ã€‚
 	public void evaluate(){
-		//Í¬²½Ä¿±êº¯ÊıÖµºÍÊÊÓ¦¶È
+		//åŒæ­¥ç›®æ ‡å‡½æ•°å€¼å’Œé€‚åº”åº¦
 		for(int i = 0; i < size; i++){
 			pop[i].calTargetValue();
 			pop[i].calFitness();
 		}
 		
-		//Ê¹ÓÃ×îÓÅ±£´æ²ßÂÔ(Elitist Model)±£´æ×îÓÅ¸öÌå
+		//ä½¿ç”¨æœ€ä¼˜ä¿å­˜ç­–ç•¥(Elitist Model)ä¿å­˜æœ€ä¼˜ä¸ªä½“
 		findBestAndWorstIndividual();
 		pop[worstIndex] = (Individual)currentBest.clone();
 		
 		generation++;	
 	}	
-	//ÕÒ³öÊÊÓ¦¶È×î´óµÄ¸öÌå
+	//æ‰¾å‡ºé€‚åº”åº¦æœ€å¤§çš„ä¸ªä½“
 	public void findBestAndWorstIndividual(){
 		bestIndividual = worstIndividual = pop[0];
 		for(int i = 1; i <size;i++){
@@ -210,7 +210,7 @@ class Population{
 			}
 		}
 	
-		if( generation == 0 ){//³õÊ¼ÖÖÈº
+		if( generation == 0 ){//åˆå§‹ç§ç¾¤
 			currentBest = (Individual)bestIndividual.clone();
 		}else{
 			if(bestIndividual.fitness > currentBest.fitness)
@@ -218,14 +218,14 @@ class Population{
 		}
 	}
 	
-	//ÅĞ¶Ï½ø»¯ÊÇ·ñÍê³É
+	//åˆ¤æ–­è¿›åŒ–æ˜¯å¦å®Œæˆ
 	public boolean isEvolutionDone(){
 		if(generation < GeneticAlgorithms.maxGeneration)
 			return false;
 		return true;	
 	}
 		
-	//¼ÆËãÆ½¾ùÊÊÓ¦¶È
+	//è®¡ç®—å¹³å‡é€‚åº”åº¦
 	public double calAverageFitness(){
 		for(int i = 0 ; i < size; i++){
 			averageFitness += pop[i].getFitness();
@@ -235,7 +235,7 @@ class Population{
 		return averageFitness;
 	} 
 				
-	//²úÉúËæ»úÊı
+	//äº§ç”Ÿéšæœºæ•°
 	private double rand(){
 		return Math.random();
 	}
